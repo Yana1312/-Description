@@ -1,0 +1,41 @@
+CREATE SCHEMA IF NOT EXISTS clinica;
+USE clinica;
+
+CREATE TABLE IF NOT EXISTS DOCTORS (
+    IdDoctors INT PRIMARY KEY AUTO_INCREMENT,
+    FIO VARCHAR(30),
+    Experience VARCHAR(15),
+    Qualification VARCHAR(30)
+);
+
+CREATE TABLE IF NOT EXISTS SERVICES (
+    IdService INT PRIMARY KEY AUTO_INCREMENT,
+    IdDoctors INT,
+    Price float,
+    Service VARCHAR(45),
+    Recipe VARCHAR(60),
+    Diagnosis VARCHAR(30),
+    FOREIGN KEY (IdDoctors) REFERENCES DOCTORS(IdDoctors)
+);
+
+CREATE TABLE IF NOT EXISTS PATIENT(
+IdPatient INT PRIMARY KEY AUTO_INCREMENT,
+SpecialCategory varchar(25),
+FIO VARCHAR(30),
+GENDER VARCHAR(10),
+NumberPhone VARCHAR(11),
+Adress VARCHAR(15),
+DateBirth Date,
+MedicalCard VARCHAR(12)
+);
+
+CREATE TABLE IF NOT EXISTS APPOINTMENT(
+IdAppointment INT PRIMARY KEY AUTO_INCREMENT,
+IdPatient INT,
+IdService INT,
+Statuss VARCHAR(10),
+Datee Date,
+Timee Time,
+FOREIGN KEY (IdService) REFERENCES SERVICES(IdService),
+FOREIGN KEY (IdPatient) REFERENCES PATIENT(IdPatient)
+);
